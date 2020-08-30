@@ -5,15 +5,17 @@ const STYLESHEET_ID = 'stylesheet.agenda.list';
 
 export default function styleConstructor(theme = {}) {
   const appStyle = {...defaultStyle, ...theme};
-  return  StyleSheet.create({
+  return StyleSheet.create({
     container: {
-      flexDirection: 'row'
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     dayNum: {
       fontSize: 28,
       fontWeight: '200',
       fontFamily: appStyle.textDayFontFamily,
-      color: appStyle.agendaDayNumColor
+      color: appStyle.agendaDayNumColor,
     },
     dayText: {
       fontSize: 14,
@@ -21,17 +23,16 @@ export default function styleConstructor(theme = {}) {
       fontFamily: appStyle.textDayFontFamily,
       color: appStyle.agendaDayTextColor,
       backgroundColor: 'rgba(0,0,0,0)',
-      marginTop: -5
+      marginTop: -5,
     },
     day: {
       width: 63,
       alignItems: 'center',
       justifyContent: 'flex-start',
-      marginTop: 32
     },
     today: {
-      color: appStyle.agendaTodayColor
+      color: appStyle.agendaTodayColor,
     },
-    ...(theme[STYLESHEET_ID] || {})
+    ...(theme[STYLESHEET_ID] || {}),
   });
 }
