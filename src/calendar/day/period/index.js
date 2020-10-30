@@ -7,7 +7,6 @@ import Dot from '../../dot';
 import * as defaultStyle from '../../../style';
 import styleConstructor from './style';
 
-
 class Day extends Component {
   static displayName = 'IGNORE';
 
@@ -20,7 +19,7 @@ class Day extends Component {
     onPress: PropTypes.func,
     onLongPress: PropTypes.func,
     date: PropTypes.object,
-    markingExists: PropTypes.bool
+    markingExists: PropTypes.bool,
   };
 
   constructor(props) {
@@ -63,7 +62,7 @@ class Day extends Component {
     } else if (marking.selected) {
       defaultStyle.textStyle.color = this.theme.selectedDayTextColor;
     }
-    const resultStyle = ([marking]).reduce((prev, next) => {
+    const resultStyle = [marking].reduce((prev, next) => {
       if (next.quickAction) {
         if (next.first || next.last) {
           prev.containerStyle = this.style.firstQuickAction;
@@ -89,17 +88,17 @@ class Day extends Component {
       }
       if (next.startingDay) {
         prev.startingDay = {
-          color
+          color,
         };
       }
       if (next.endingDay) {
         prev.endingDay = {
-          color
+          color,
         };
       }
       if (!next.startingDay && !next.endingDay) {
         prev.day = {
-          color
+          color,
         };
       }
       if (next.textColor) {
@@ -133,7 +132,7 @@ class Day extends Component {
 
     if (this.props.marking) {
       containerStyle.push({
-        borderRadius: 17
+        borderRadius: 17,
       });
 
       const flags = this.markingStyle;
@@ -152,23 +151,23 @@ class Day extends Component {
 
       if (flags.startingDay && !flags.endingDay) {
         leftFillerStyle = {
-          backgroundColor: this.theme.calendarBackground
+          backgroundColor: this.theme.calendarBackground,
         };
         rightFillerStyle = {
-          backgroundColor: flags.startingDay.color
+          backgroundColor: '#F0F0FE',
         };
         containerStyle.push({
-          backgroundColor: flags.startingDay.color
+          backgroundColor: flags.startingDay.color,
         });
       } else if (flags.endingDay && !flags.startingDay) {
         rightFillerStyle = {
-          backgroundColor: this.theme.calendarBackground
+          backgroundColor: this.theme.calendarBackground,
         };
         leftFillerStyle = {
-          backgroundColor: flags.endingDay.color
+          backgroundColor: '#F0F0FE',
         };
         containerStyle.push({
-          backgroundColor: flags.endingDay.color
+          backgroundColor: flags.endingDay.color,
         });
       } else if (flags.day) {
         leftFillerStyle = {backgroundColor: flags.day.color};
@@ -177,25 +176,28 @@ class Day extends Component {
         fillerStyle = {backgroundColor: flags.day.color};
       } else if (flags.endingDay && flags.startingDay) {
         rightFillerStyle = {
-          backgroundColor: this.theme.calendarBackground
+          backgroundColor: this.theme.calendarBackground,
         };
         leftFillerStyle = {
-          backgroundColor: this.theme.calendarBackground
+          backgroundColor: this.theme.calendarBackground,
         };
         containerStyle.push({
-          backgroundColor: flags.endingDay.color
+          backgroundColor: flags.endingDay.color,
         });
       }
 
       fillers = (
         <View style={[this.style.fillers, fillerStyle]}>
-          <View style={[this.style.leftFiller, leftFillerStyle]}/>
-          <View style={[this.style.rightFiller, rightFillerStyle]}/>
+          <View style={[this.style.leftFiller, leftFillerStyle]} />
+          <View style={[this.style.rightFiller, rightFillerStyle]} />
         </View>
       );
     }
 
-    const {marking: {marked, dotColor}, theme} = this.props;
+    const {
+      marking: {marked, dotColor},
+      theme,
+    } = this.props;
 
     return (
       <TouchableWithoutFeedback
@@ -210,12 +212,10 @@ class Day extends Component {
         <View style={this.style.wrapper}>
           {fillers}
           <View style={containerStyle}>
-            <Text allowFontScaling={false} style={textStyle}>{String(this.props.children)}</Text>
-            <Dot
-              theme={theme}
-              isMarked={marked}
-              dotColor={dotColor}
-            />
+            <Text allowFontScaling={false} style={textStyle}>
+              {String(this.props.children)}
+            </Text>
+            <Dot theme={theme} isMarked={marked} dotColor={dotColor} />
           </View>
         </View>
       </TouchableWithoutFeedback>
